@@ -13,7 +13,7 @@ class Servidor extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuarioId', 'id');
+        return $this->belongsTo(User::class, 'usuarioId', 'id');
     }
 
     public function coordenadores()
