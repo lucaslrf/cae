@@ -5,9 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UsersRoles;
+use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -56,6 +59,16 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        if(auth()->check() && (auth()->user()->hasRole('admin'))){
+            $roles = Role::all();
+            return view('auth.register', compact('roles'));
+        }else{
+            return redirect()->route('home');
+        }
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -64,20 +77,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        Log::info('data', [$data]);
+        if(auth()->check() && (auth()->user()->hasRole('admin'))){
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            Log::info('user', [$user]);
+            //cadastrar users_roles
+            UsersRoles::create([
+                'user_id' => $user->id,
+                'role_id' => $data['role_id']
+            ]);
+            return $user;
+        }else{
+            return redirect()->route('home');
+        }
     }
+
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        Log::info('userlogado', [auth()->user()]);
+        if(auth()->check() && (auth()->user()->hasRole('admin'))){
+            $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+            event(new Registered($user = $this->create($request->all())));
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+            return $this->registered($request, $user)
+                ?: redirect($this->redirectPath());
+        }else{
+            return redirect()->route('home');
+        }
     }
 }

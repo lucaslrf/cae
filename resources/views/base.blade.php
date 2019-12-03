@@ -73,7 +73,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Sair') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -98,13 +98,15 @@
                             Início <span class="sr-only"></span>
                             </a>
                         </li>
-                        @role('admin','coordenador')                        
+                        @role('admin')                        
                         <li class="nav-item">
                             <a class="nav-link"  href="{{ route('blocos.index') }}">
                             <span data-feather="box"></span>
                             Blocos
                             </a>
                         </li>
+                        @endrole
+                        @role('admin','coordenador')   
                         <li class="nav-item">
                             <a class="nav-link" href="">
                             <span data-feather="anchor"></span>
@@ -113,7 +115,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="">
-                            <span data-feather="box"></span>
+                            <span data-feather="cpu"></span>
                             Equipamentos
                             </a>
                         </li>
