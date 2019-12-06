@@ -8,7 +8,7 @@ class Servidor extends Model
 {   
     protected $table = 'servidores';
 	protected $fillable = [
-        'siape', 'usuarioId', 'nome', 'CPF', 'telefone', 'tipo', 
+       'id', 'siape', 'usuarioId', 'nome', 'CPF', 'telefone', 'tipo'
     ];
 
     public function usuario()

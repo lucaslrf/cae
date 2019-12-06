@@ -122,13 +122,13 @@
                         @endrole                        
                         @role('admin')  
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('servidores.index') }}">
                             <span data-feather="user"></span>
                             Servidores
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link"  href="{{ route('coordenadores.index') }}">
                             <span data-feather="user-plus"></span>
                             Coordenadores
                             </a>

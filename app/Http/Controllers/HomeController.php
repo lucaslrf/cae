@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Providers\PermissionsServiceProvider;
-
 class HomeController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *

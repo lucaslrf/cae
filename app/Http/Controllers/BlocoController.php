@@ -53,6 +53,7 @@ class BlocoController extends Controller
 
     public function edit(Bloco $bloco)
     {
+        Log::info('dados bloco e edit', [$bloco]);
         //busca pemissao de blocos        
         $bloco_permissao = Permission::where('slug','bloco')->first();
 

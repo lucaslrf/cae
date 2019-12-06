@@ -18,3 +18,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('blocos','BlocoController');
+
+Route::resource('servidores','ServidorController');
+
+Route::resource('coordenadores','CoordenadorController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

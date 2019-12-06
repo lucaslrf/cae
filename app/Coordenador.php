@@ -8,7 +8,7 @@ class Coordenador extends Model
 {
     protected $table = 'coordenadores';
 	protected $fillable = [
-        'servidorId', 'dataInicial', 'cargo', 'dataFinal'
+        'id', 'servidorId', 'dataInicial', 'cargo', 'dataFinal'
     ];
 
     public function servidor()
