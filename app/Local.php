@@ -8,11 +8,26 @@ class Local extends Model
 {
     protected $table = 'locais';
 	protected $fillable = [
-        'nome', 'descricao'
+        'id','nome', 'status', 'numeroChave', 'capacidade', 'blocoId', 'coordenadorId'
     ];
-
-    public function locais()
+    
+     public function bloco()
     {
-        return $this->hasMany(Local::class, 'blocoId', 'id');
+        return $this->belongsTo(Bloco::class, 'blocoId', 'id');
+    }
+    
+     public function coordenador()
+    {
+        return $this->belongsTo(Coordenador::class, 'coordenadorId', 'id');
+    }
+
+    public function equipamentos()
+    {
+        return $this->hasMany(Equipamento::class, 'localId', 'id');
+    }
+    
+     public function reservas()
+    {
+        return $this->hasMany(Reserva::class, 'localId', 'id');
     }
 }

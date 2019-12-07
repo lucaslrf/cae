@@ -19,12 +19,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('blocos','BlocoController');
 
-Route::resource('servidores','ServidorController');
+Route::resource('locais','LocalController');
 
-Route::resource('coordenadores','CoordenadorController');
+Route::resource ( 'servidores', 'ServidorController');
 
-Route::resource('users','UserController');
+Route::resource ( 'coordenadores','CoordenadorController');
 
-Auth::routes();
+Route::resource ( 'equipamentos','EquipamentoController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+

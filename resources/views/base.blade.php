@@ -108,13 +108,13 @@
                         @endrole
                         @role('admin','coordenador')   
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('locais.index') }}">
                             <span data-feather="anchor"></span>
                             Locais
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"  href="">
+                            <a class="nav-link" href="{{ route('equipamentos.index')}}">
                             <span data-feather="cpu"></span>
                             Equipamentos
                             </a>
@@ -134,8 +134,7 @@
                             </a>
                         </li>                   
                         <li class="nav-item">
-                            <!-- <a class="nav-link" href="{{ route('register') }}"> -->
-                            <a class="nav-link" href="{{ route('users.index') }}">
+                            <a class="nav-link" href="{{ route('register') }}">
                             <span data-feather="user"></span>
                             Usuários
                             </a>
