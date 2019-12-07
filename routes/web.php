@@ -23,6 +23,8 @@ Route::resource('servidores','ServidorController');
 
 Route::resource('coordenadores','CoordenadorController');
 
+Route::resource('users','UserController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

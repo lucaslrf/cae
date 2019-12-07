@@ -134,7 +134,8 @@
                             </a>
                         </li>                   
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">
+                            <!-- <a class="nav-link" href="{{ route('register') }}"> -->
+                            <a class="nav-link" href="{{ route('users.index') }}">
                             <span data-feather="user"></span>
                             Usuários
                             </a>
