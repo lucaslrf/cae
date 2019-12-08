@@ -4,7 +4,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
             <div class="py-5 text-center">
-                <h2>Editar Servidor</h2>
+                <h2>Editar Equipamento</h2>
             </div>
             <div class="order-md-1">
                 <form action="{{ route('equipamentos.update', $equipamento->id) }}" method="POST">
@@ -16,7 +16,7 @@
                             <label for="nome">Nome:</label>
                               <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento->nome }}"> 
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status" id="status">
                                  @if ($equipamento->status == "DISPONIVEL")
@@ -29,10 +29,10 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="tombo">tombo:</label>
+                            <label for="tombo">Tombo:</label>
                             <input type="text" class="form-control" name="tombo" id="tombo" value="{{ $equipamento->tombo }}">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="descricao">Descricao:</label>
                             <input type="text" class="form-control" name="decricao" id=decricao" value="{{ $equipamento->decricao }}">
                         </div>

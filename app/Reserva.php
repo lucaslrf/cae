@@ -9,7 +9,7 @@ class Reserva extends Model
     const CREATED_AT = 'dataHoraSolicitacao';
     const UPDATED_AT = 'dataHoraAtualizacao';
 	protected $fillable = [
-        'dataHoraSolicitacao', 'dataHoraAtualizacao', 'servidorId', 'localId', 'status', 'tipo', 'responsavel', 'cordenadorId'
+        'dataHoraSolicitacao', 'dataHoraAtualizacao', 'servidorId', 'localId', 'status', 'tipo', 'responsavel', 'coordenadorId'
     ];
 
     public function servidor()

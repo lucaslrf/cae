@@ -12,7 +12,7 @@
                     @method('PUT')
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nome">Nome:</label>
+                            <label for="nome">Servidor:</label>
                             <!-- <input type="text" class="form-control" name="nome" id="nome"> -->
                             <select class="form-control" name="usuarioId" id="usuarioId">
                                 @foreach($users as $user)

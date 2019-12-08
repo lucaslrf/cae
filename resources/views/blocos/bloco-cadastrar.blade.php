@@ -15,7 +15,7 @@
                             <input type="text" class="form-control" name="nome" id="nome">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="descricao">Descricao:</label>                    
+                            <label for="descricao">Descrição:</label>                    
                             <input type="text" class="form-control" name="descricao" id="descricao">
                         </div>
                         <div class="col-md-12">

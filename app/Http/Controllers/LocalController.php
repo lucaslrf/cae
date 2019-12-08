@@ -34,15 +34,9 @@ class LocalController extends Controller
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
 
-            $blocos = DB::table('blocos')
-                    ->select( 'blocos.nome', 'blocos.id')
-                    ->get();
+            $blocos = Bloco::all();
 
-
-            $coordenadores = DB::table('coordenadores')
-                    ->join('servidores', 'coordenadores.servidorId', '=', 'servidores.id')
-                    ->select( 'servidores.nome', 'coordenadores.id')
-                    ->get();
+            $coordenadores = Coordenador::all();
 
             return view('locais.local-cadastrar', compact('blocos', 'coordenadores'));
             
@@ -83,15 +77,10 @@ class LocalController extends Controller
 
             $local = Local::find($id);
 
-            $blocos = DB::table('blocos')
-                    ->select( 'blocos.nome', 'blocos.id')
-                    ->get();
 
+            $blocos = Bloco::all();
 
-            $coordenadores = DB::table('coordenadores')
-                    ->join('servidores', 'coordenadores.servidorId', '=', 'servidores.id')
-                    ->select( 'servidores.nome', 'coordenadores.id')
-                    ->get();
+            $coordenadores = Coordenador::all();
 
             return view('locais.local-editar', compact('local','blocos', 'coordenadores'));
         } else {
@@ -106,9 +95,9 @@ class LocalController extends Controller
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
 
              $local = Local::find($id);
-             $blocos = Bloco::select('id')->where('id', $request->blocoId)->first();
-             $coordenadores = Coordenador::select('id')->where('id', $request->coordenadorId)->first();
-             $local->update(array_merge($request->all(), ['blocoId' => $blocos->id], ['coordenadorId' => $coordenadores->id]));
+             $bloco = Bloco::find($request->blocoId);
+             $coordenador = Coordenador::find($request->coordenadorId);
+             $local->update(array_merge($request->all(), ['blocoId' => $bloco->id], ['coordenadorId' => $coordenador->id]));
              return redirect()->route('locais.index');
          } else {
              return redirect()->route('login');
@@ -121,7 +110,6 @@ class LocalController extends Controller
         $local_permissao = Permission::where('slug', 'local')->first();
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-            
             $local = Local::find($id);
             $local->delete();
             return redirect()->route('locais.index');

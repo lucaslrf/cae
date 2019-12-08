@@ -40,38 +40,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirme a Senha') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="role_id">
-        
-                                    <option selected>Selecione o grupo</option>
-                                    
+                                <select class="form-control" name="role_id">                                    
                                     @foreach ($roles as $key => $value)
-                                    <option value="{{ $value->id }}"> 
-                                        {{ $value->name }} 
-                                    </option>
+                                        @if($user->user_role->role->id == $value->id)
+                                            <option value="{{ $value->id }}" selected="selected"> {{ $value->name }} </option>
+                                        @else
+                                            <option value="{{ $value->id }}"> {{ $value->name }} </option>
+                                        @endif
                                     @endforeach    
                                 </select>
                             </div>
@@ -80,7 +57,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Cadastrar') }}
+                                    {{ __('Editar') }}
                                 </button>
                                 <a href="{{ route('users.index') }}" class="btn btn-outline-secondary">Voltar</a>
                             </div>

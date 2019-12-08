@@ -4,7 +4,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
             <div class="py-5 text-center">
-                <h2>Cadastrar Locais</h2>
+                <h2>Cadastrar Local</h2>
             </div>
             <div class="order-md-1">
                 <form action="{{ route('locais.store') }}" method="post">
@@ -14,7 +14,7 @@
                             <label for="nome">Nome:</label>
                               <input type="text" class="form-control" name="nome" id="nome"> 
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status" id="status">
                                 <option value="DISPONIVEL">DISPONIVEL</option>
@@ -22,12 +22,12 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="numeroChave">Numero de Chave:</label>
-                            <input type="text" class="form-control" name="numeroChave" id="numeroChave">
+                            <label for="numeroChave">Número de Chave:</label>
+                            <input type="number" class="form-control" name="numeroChave" id="numeroChave">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="capacidade">Capacidade:</label>
-                            <input type="text" class="form-control" name="capacidade" id="capacidade">
+                            <input type="number" class="form-control" name="capacidade" id="capacidade">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="blocoId">Bloco:</label>
@@ -41,7 +41,7 @@
                             <label for="coordenadorId">Coordenador:</label>
                             <select class="form-control" name="coordenadorId" id="coodernadorId">
                                 @foreach($coordenadores as $coordenador)
-                                    <option class="form-control" value="{{$coordenador->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->nome}}</option>
+                                    <option class="form-control" value="{{$coordenador->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
                                 @endforeach
                             </select>
                         </div>

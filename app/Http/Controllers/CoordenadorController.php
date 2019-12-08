@@ -19,10 +19,6 @@ class CoordenadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
-    {
-        //
-    }
 
     public function index()
     {
@@ -31,8 +27,7 @@ class CoordenadorController extends Controller
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($coordenador_permissao)) {
 
-            $coordenadores = DB::table('coordenadores')
-                ->join('servidores', 'coordenadores.servidorId', '=', 'servidores.id')
+            $coordenadores = Coordenador::join('servidores', 'coordenadores.servidorId', '=', 'servidores.id')
                 ->join('users', 'servidores.usuarioId', '=', 'users.id')
                 ->select('coordenadores.id', 'coordenadores.servidorId', 'coordenadores.cargo', 'coordenadores.dataInicial', 'coordenadores.dataFinal', 'servidores.nome as nome', 'servidores.usuarioId')
                 ->get();
@@ -48,14 +43,14 @@ class CoordenadorController extends Controller
         $coordenador_permissao = Permission::where('slug', 'servidor')->first();
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($coordenador_permissao)) {
-            $users = DB::table('users')
-                ->join('servidores', 'users.id', '=', 'servidores.usuarioId')
+            $users = User::join('servidores', 'users.id', '=', 'servidores.usuarioId')
                 ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
                 ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+                ->leftJoin('coordenadores', 'servidores.id', '=', 'coordenadores.servidorId')
                 ->whereIn('roles.id', ['2'])
+                ->where('coordenadores.id', NULL)
                 ->select('users.name', 'servidores.id')
                 ->get();
-
 
             return view('coordenadores.coordenador-cadastrar', compact('users'));
         } else {
@@ -68,9 +63,8 @@ class CoordenadorController extends Controller
         $coordenador_permissao = Permission::where('slug', 'servidor')->first();
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($coordenador_permissao)) {
-
             $servidorId = Servidor::select('id')->where('id', $request->servidorId)->first();
-            Coordenador::create(array_merge($request->all(), ['id' => $servidorId->id]));
+            Coordenador::create(array_merge($request->all(), ['servidorId' => $servidorId->id]));
             return redirect()->route('coordenadores.index');
         } else {
             return redirect()->route('login');
@@ -89,13 +83,17 @@ class CoordenadorController extends Controller
 
             $servidor = Servidor::find($coordenador->servidorId);
 
-            $users = DB::table('users')
-                ->join('servidores', 'users.id', '=', 'servidores.usuarioId')
+            $users = User::join('servidores', 'users.id', '=', 'servidores.usuarioId')
                 ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
                 ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+                ->leftJoin('coordenadores', 'servidores.id', '=', 'coordenadores.servidorId')
                 ->whereIn('roles.id', ['2'])
-                ->select('users.name', 'users.id')
+                ->where('coordenadores.id', NULL)
+                ->select('users.name', 'servidores.id')
                 ->get();
+                
+            $user_atual = $servidor->usuario;
+            $users->push($user_atual);
 
             return view('coordenadores.coordenador-editar', compact('coordenador', 'servidor', 'users'));
         } else {

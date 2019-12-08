@@ -16,7 +16,7 @@ class Servidor extends Model
         return $this->belongsTo(User::class, 'usuarioId', 'id');
     }
 
-    public function coordenadores()
+    public function coordenador()
     {
         return $this->hasOne(Coordenador::class, 'servidorId', 'id');
     }

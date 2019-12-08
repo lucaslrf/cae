@@ -11,8 +11,7 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="nome">Nome:</label>
-                            <!-- <input type="text" class="form-control" name="nome" id="nome"> -->
+                            <label for="nome">Nome/Usuário:</label>
                             <select class="form-control" name="usuarioId" id="usuarioId">
                                 @foreach($users as $user)
                                     <option class="form-control" value="{{$user->id}}" id="usuarioId" name="usuarioId">{{$user->name}}</option>

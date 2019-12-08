@@ -41,10 +41,11 @@ class ServidorController extends Controller
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($servidor_permissao)) {
 
-            $users = DB::table('users')
-                ->join('users_roles', 'users.id', '=', 'users_roles.user_id')
+            $users = User::join('users_roles', 'users.id', '=', 'users_roles.user_id')
                 ->join('roles', 'users_roles.role_id', '=', 'roles.id')
+                ->leftJoin('servidores', 'users.id', '=', 'servidores.usuarioId')
                 ->whereIn('roles.id', ['2', '3'])
+                ->where('servidores.id', NULL)
                 ->select('users.name', 'users.id')
                 ->get();
 
@@ -75,15 +76,17 @@ class ServidorController extends Controller
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($servidor_permissao)) {
 
-
             $servidor = Servidor::find($id);
-            $users = DB::table('users')
-                ->join('users_roles', 'users.id', '=', 'users_roles.user_id')
+            $users = User::join('users_roles', 'users.id', '=', 'users_roles.user_id')
                 ->join('roles', 'users_roles.role_id', '=', 'roles.id')
+                ->leftJoin('servidores', 'users.id', '=', 'servidores.usuarioId')
                 ->whereIn('roles.id', ['2', '3'])
+                ->where('servidores.id', NULL)
                 ->select('users.name', 'users.id')
                 ->get();
+            $user_atual = $servidor->usuario;
 
+            $users->push($user_atual);
             return view('servidores.servidor-editar', compact('servidor', 'users'));
         } else {
             return redirect()->route('login');

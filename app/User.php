@@ -38,4 +38,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function servidor()
+    {
+        return $this->hasOne(Servidor::class, 'usuarioId', 'id');
+    }
+
+    public function user_role()
+    {
+        return $this->hasOne(UsersRoles::class, 'user_id', 'id');
+    }
+
 }

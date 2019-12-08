@@ -37,7 +37,7 @@
                                 {{ $coordenador->cargo }}
                             </td>
                             <td>
-                                {{ $coordenador->dataInicial }}
+                                {{ date("d/m/Y", strtotime($coordenador->dataInicial)) }}
                             </td>
                             <td>
                                 <div class="row">

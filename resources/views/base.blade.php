@@ -39,6 +39,7 @@
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
   </head>
   <body>
+        @include('sweetalert::alert')
         {{-- <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CAE</a>
         </nav> --}}
@@ -97,7 +98,27 @@
                             <span data-feather="home"></span>
                             Início <span class="sr-only"></span>
                             </a>
+                        </li>                     
+                        @role('admin')                  
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">
+                            <span data-feather="user"></span>
+                            Usuários
+                            </a>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('servidores.index') }}">
+                            <span data-feather="user"></span>
+                            Servidores
+                            </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{{ route('coordenadores.index') }}">
+                            <span data-feather="user-plus"></span>
+                            Coordenadores
+                            </a>
+                        </li> 
+                        @endrole                        
                         @role('admin')                        
                         <li class="nav-item">
                             <a class="nav-link"  href="{{ route('blocos.index') }}">
@@ -119,33 +140,15 @@
                             Equipamentos
                             </a>
                         </li>
-                        @endrole                        
-                        @role('admin')  
+                        @endrole   
+                        @role('servidor','coordenador')  
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('servidores.index') }}">
-                            <span data-feather="user"></span>
-                            Servidores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('coordenadores.index') }}">
-                            <span data-feather="user-plus"></span>
-                            Coordenadores
-                            </a>
-                        </li>                   
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">
-                            <span data-feather="user"></span>
-                            Usuários
-                            </a>
-                        </li>
-                        @endrole
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('reservas.index') }}">
                             <span data-feather="database"></span>
                             Reservas
                             </a>
                         </li>
+                        @endrole
                         </ul>
                     </div>
                 </nav>

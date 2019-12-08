@@ -4,7 +4,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
             <div class="py-5 text-center">
-                <h2>Cadastrar Locais</h2>
+                <h2>Cadastrar Equipamento</h2>
             </div>
             <div class="order-md-1">
                 <form action="{{ route('equipamentos.store') }}" method="post">
@@ -14,7 +14,7 @@
                             <label for="nome">Nome:</label>
                               <input type="text" class="form-control" name="nome" id="nome"> 
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status" id="status">
                                 <option value="DISPONIVEL">DISPONIVEL</option>
@@ -25,7 +25,7 @@
                             <label for="tombo">Tombo:</label>
                             <input type="text" class="form-control" name="tombo" id="tombo">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="descricao">Descrição:</label>
                             <input type="text" class="form-control" name="decricao" id="decricao">
                         </div>

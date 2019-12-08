@@ -33,11 +33,8 @@ class EquipamentoController extends Controller
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
 
-            $locais = DB::table('locais')
-                    ->select( 'locais.nome', 'locais.id')
-                    ->get();
-
-                return view('equipamentos.equipamento-cadastrar', compact('locais'));
+            $locais = Local::all();
+            return view('equipamentos.equipamento-cadastrar', compact('locais'));
         } else {
             return redirect()->route('login');
         }
@@ -70,9 +67,7 @@ class EquipamentoController extends Controller
 
              $equipamento = Equipamento::find($id);
 
-             $locais = DB::table('locais')
-                    ->select( 'locais.nome', 'locais.id')
-                    ->get();
+             $locais = Local::all();
             
              return view('equipamentos.equipamento-editar', compact('equipamento','locais'));
         } else {

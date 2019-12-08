@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Data extends Model
 {
+    protected $table = 'datas';
 	protected $fillable = [
-        'dataHoraSolicitacao', 'dataHoraInicial', 'dataHoraFinal', 'reservaId'
+        'datahoraSolicitacao', 'dataHoraInicial', 'dataHoraFinal', 'reservaId'
     ];
 
     public function reserva()

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
 use App\User;
+use App\UsersRoles;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -40,13 +41,6 @@ class UserController extends Controller
          $user_permissao = Permission::where('slug', 'usuario')->first();
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($user_permissao)) {
-
-            // $users = DB::table('users')
-            //     ->join('users_roles', 'users.id', '=', 'users_roles.user_id')
-            //     ->join('roles', 'users_roles.role_id', '=', 'roles.id')
-            //     ->whereIn('roles.id', ['2', '3'])
-            //     ->select('users.name', 'users.id')
-            //     ->get();
 
             return view('register');
         } else {
@@ -91,7 +85,17 @@ class UserController extends Controller
 
          if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($user_permissao)) {
 
-            $user->update(array_merge($request->all()));
+            //verificar se a regra mudou
+            Log::info('request update user',[$request->role_id]);
+            Log::info('request update role',[$user->user_role->role->id]);
+            if((int) $user->user_role->role->id != (int) $request->role_id){
+                DB::table('users_roles')->where('user_id', $user->id)->delete();
+                UsersRoles::create([
+                    'user_id' => $user->id,
+                    'role_id' => $request->role_id
+                ]);
+            }
+            $user->update($request->all());            
 
             return redirect()->route('users.index');
          } else {

@@ -4,7 +4,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
             <div class="py-5 text-center">
-                <h2>Editar Servidor</h2>
+                <h2>Editar Local</h2>
             </div>
             <div class="order-md-1">
                 <form action="{{ route('locais.update', $local->id) }}" method="POST">
@@ -16,7 +16,7 @@
                             <label for="nome">Nome:</label>
                               <input type="text" class="form-control" name="nome" id="nome" value="{{ $local->nome }}"> 
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status" id="status">
                                  @if ($local->status == "DISPONIVEL")
@@ -57,11 +57,11 @@
                             <label for="coordenador">Coordenador:</label>
                             <!-- <input type="text" class="form-control" name="nome" id="nome"> -->
                             <select class="form-control" name="coordenadorId" id="coordenadorId">
-                               @foreach($coordenadores as $servidor)
+                               @foreach($coordenadores as $coordenador)
                                 @if ($local->coordenadorId == $servidor->id)
-                                    <option class="form-control" selected="selected" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$servidor->nome}}</option>
+                                    <option class="form-control" selected="selected" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
                                 @else
-                                    <option class="form-control" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$servidor->nome}}</option>
+                                    <option class="form-control" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
                                 @endif
 
                                 @endforeach

@@ -21,7 +21,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Status</th>
                             <th scope="col">Tombo</th>
-                            <th scope="col">Descricao</th>
+                            <th scope="col">Descrição</th>
                             <th scope="col">Local</th>
                             <th scope="col">Ações</th>
                         </tr>
