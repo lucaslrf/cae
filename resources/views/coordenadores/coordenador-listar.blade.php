@@ -21,6 +21,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Cargo</th>
                             <th scope="col">Data Inicial</th>
+                            <th scope="col">Data Final</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -38,6 +39,9 @@
                             </td>
                             <td>
                                 {{ date("d/m/Y", strtotime($coordenador->dataInicial)) }}
+                            </td>
+                            <td>
+                                {{ $coordenador->dataFinal }}
                             </td>
                             <td>
                                 <div class="row">

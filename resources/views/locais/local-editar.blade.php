@@ -58,10 +58,10 @@
                             <!-- <input type="text" class="form-control" name="nome" id="nome"> -->
                             <select class="form-control" name="coordenadorId" id="coordenadorId">
                                @foreach($coordenadores as $coordenador)
-                                @if ($local->coordenadorId == $servidor->id)
-                                    <option class="form-control" selected="selected" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
+                                @if ($local->coordenadorId == $coordenador->id)
+                                    <option class="form-control" selected="selected" value="{{$coordenador->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
                                 @else
-                                    <option class="form-control" value="{{$servidor->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
+                                    <option class="form-control" value="{{$coordenador->id}}" id="coordenadorId" name="coordenadorId">{{$coordenador->servidor->nome}}</option>
                                 @endif
 
                                 @endforeach

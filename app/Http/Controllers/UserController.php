@@ -107,7 +107,7 @@ class UserController extends Controller
     {
 
 
-        $user = Servidor::find($id);
+        $user = User::find($id);
         $user_permissao = Permission::where('slug', 'usuario')->first();
 
         if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($user_permissao)) {
