@@ -17,7 +17,7 @@ class EquipamentoController extends Controller
         
         $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
             $equipamentos = Equipamento::all();
             return view('equipamentos.equipamento-listar', compact('equipamentos'));
             
@@ -31,7 +31,7 @@ class EquipamentoController extends Controller
     {
         $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
 
             $locais = Local::all();
             return view('equipamentos.equipamento-cadastrar', compact('locais'));
@@ -44,7 +44,7 @@ class EquipamentoController extends Controller
 
             $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-            if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+            if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
 
                 $locaisId = Local::select('id')->where('id', $request->localId)->first();
                 Equipamento::create(array_merge($request->all(), ['localId' => $locaisId->id]));
@@ -63,7 +63,7 @@ class EquipamentoController extends Controller
     {
         $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
 
              $equipamento = Equipamento::find($id);
 
@@ -79,7 +79,7 @@ class EquipamentoController extends Controller
     {
         $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
 
              $equipamento = Equipamento::find($id);
              $locais = Local::select('id')->where('id', $request->localId)->first();
@@ -96,7 +96,7 @@ class EquipamentoController extends Controller
     {
         $equipamento_permissao = Permission::where('slug', 'equipamento')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($equipamento_permissao)) {
             $equipamento = Equipamento::find($id);
             $equipamento->delete();
             return redirect()->route('equipamentos.index');

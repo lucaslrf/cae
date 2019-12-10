@@ -18,7 +18,7 @@ class LocalController extends Controller
        $locais = Local::all();
        $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
     
            return view('locais.local-listar', compact('locais'));
             
@@ -32,8 +32,7 @@ class LocalController extends Controller
     {
         $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
             $blocos = Bloco::all();
 
             $coordenadores = Coordenador::all();
@@ -50,8 +49,7 @@ class LocalController extends Controller
         
         $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
             $blocosId = Bloco::select('id')->where('id', $request->blocoId)->first();
             $coordenadoresId = Coordenador::select('id')->where('id', $request->coordenadorId)->first();
             Local::create(array_merge($request->all(), ['blocoId' => $blocosId->id],['coordenadorId' => $coordenadoresId->id]));
@@ -73,8 +71,7 @@ class LocalController extends Controller
         
         $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
             $local = Local::find($id);
 
 
@@ -92,8 +89,7 @@ class LocalController extends Controller
     {
         $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
              $local = Local::find($id);
              $bloco = Bloco::find($request->blocoId);
              $coordenador = Coordenador::find($request->coordenadorId);
@@ -109,8 +105,8 @@ class LocalController extends Controller
     {
         $local_permissao = Permission::where('slug', 'local')->first();
 
-        if (Auth::check() && auth()->user()->hasRole('admin') && auth()->user()->hasPermissionThroughRole($local_permissao)) {
-            $local = Local::find($id);
+        if (Auth::check() && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('coordenador')) && auth()->user()->hasPermissionThroughRole($local_permissao)) {
+                        $local = Local::find($id);
             $local->delete();
             return redirect()->route('locais.index');
         } else {
