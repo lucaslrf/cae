@@ -83,7 +83,7 @@ class EquipamentoController extends Controller
 
              $equipamento = Equipamento::find($id);
              $locais = Local::select('id')->where('id', $request->localId)->first();
-             $equipamento->update(array_merge($request->all(), ['localId' => $locais->id], ));
+             $equipamento->update(array_merge($request->all(), ['localId' => $locais->id]));
           
              return redirect()->route('equipamentos.index');
          } else {
