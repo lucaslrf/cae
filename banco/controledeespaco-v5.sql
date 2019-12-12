@@ -28,6 +28,10 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `blocos`
 --
 
+CREATE DATABASE controledeespaco;
+
+USE controledeespaco;
+
 DROP TABLE IF EXISTS `blocos`;
 CREATE TABLE IF NOT EXISTS `blocos` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
